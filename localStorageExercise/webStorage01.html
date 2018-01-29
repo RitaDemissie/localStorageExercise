@@ -1,0 +1,171 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>HTML 5 Web Storage</title>
+
+<link href="reset.css" type="text/css" rel="stylesheet" />
+
+<link href="webStorage_Style.css" type="text/css" rel="stylesheet" />
+
+<script>
+window.addEventListener("load",init);
+
+
+function init(){
+	if(typeof(Storage)!=="undefined"){
+	
+	display();
+	displayOrder();
+	
+	var button=document.getElementById("button");
+	button.addEventListener("click",saveInfo);
+	
+	var btnorder=document.getElementById("btnOrder");
+	btnorder.addEventListener("click",summary);
+	
+	
+	}
+	
+	else{
+	//old bowser	
+	}
+}
+
+function saveInfo(){
+	var name=document.getElementById("name").value;
+	var comments=document.getElementById("imgMenu").alt;
+	
+	localStorage.setItem("useruserName",name);
+	localStorage.setItem("userComments",comments);
+	
+	
+	display();
+	
+}
+function summary(){
+	var donuttype=document.getElementById("donuttype").value;
+	var qty=document.getElementById("qty").value;
+	
+	localStorage.setItem("type",donuttype);
+	localStorage.setItem("quantity",qty);
+	
+	
+	displayOrder();
+	
+}
+
+
+
+function display(){
+	var rightBox=document.getElementById("useroutput");
+	var thename=localStorage.getItem("useruserName");
+	var theComments=localStorage.getItem("userComments");
+	
+	if(theComments==undefined){
+		document.getElementById("useroutput").innerHTML="";
+	}
+	else{ document.getElementById("useroutput").innerHTML="OUTPUT  <hr /><br /><br />User Name: "+thename+"<br /><br />  User comment: "+theComments;
+	}
+	
+}
+function displayOrder(){
+	var rightBox=document.getElementById("OrderSummary");
+	var theOrder=localStorage.getItem("type");
+	var theqty=localStorage.getItem("quantity");
+	
+	if(theqty==undefined){
+		document.getElementById("OrderSummary").innerHTML="";
+	}
+	else{ document.getElementById("OrderSummary").innerHTML="OUTPUT  <hr /><br /><br />Donut type: "+theOrder+"<br /><br />  The Quantity: "+theqty;
+		
+	}
+	
+}
+
+</script>
+
+
+
+</head>
+
+<body>
+
+<div id="main">
+	<section id="userinput">
+    INPUT <br>
+	<hr />
+    <br /><br />
+    <form>
+    
+    <div>userName: <br /><input type="input" id="name" size="20"></div>
+    <br />
+    <div id="img">comments:<br /> 
+		<img id="imgMenu" src="Glazed1.png" alt="Glazed" onclick="document.getElementById('myImage').src='Glazed1.png'" >
+		<img id="imgMenu" src="Nutty1.png" alt="Nutty choc" onclick="document.getElementById('myImage').src='Nutty1.png'">
+		<img id="imgMenu" src="chocF1.png" alt="Chocolate Frosted" onclick="document.getElementById('myImage').src='chocF1.png'">
+		<img id="imgMenu" src="BlackF1.png" alt="Black forest" onclick="document.getElementById('myImage').src='BlackF1.png'">
+		<img id="imgMenu" src="Bendera1.png" alt="Bendera" onclick="document.getElementById('myImage').src='Bendera1.png'">
+		<img id="imgMenu" src="chocAlmond1.png" alt="choc Almond" onclick="document.getElementById('myImage').src='chocAlmond1.png'">
+		</div>
+    <br />
+		<img id="myImage" src="donut.jpg" >
+     <div><input type="button" id="button" value="Save"></div>
+    
+    </form>
+    </section>
+    
+    
+    <section id="useroutput">
+ OUTPUT  
+ 	<hr />
+    <br /><br />
+    </section>
+
+</div>
+
+<!----------------------------------------------------------------------------------------->
+<div id="main">
+	<section id="userinput">
+    INPUT <br>
+	<hr />
+    <br /><br />
+    <form>
+	<label for="donuttype">Donut type</label>
+	<select userName="donuttype" id="donuttype" size="1">
+		<option value="Glazed Donuts" selected="selected" > Glazed Donuts</option>
+		<option value="Chocolate Frosted Donuts" > Chocolate Frosted Donuts</option>
+		<option value="Boston Creme Donuts"> Boston Creme Donuts</option>
+		<option value="Maple Donuts"> Maple Donuts</option>
+		<option value="Chocolate Donuts with Sprinkles"> Chocolate Donuts with Sprinkles</option>
+		<option value="Cinnamon Donuts"> Cinnamon Donuts</option>
+		<option value="Powdered Donuts"> Powdered Donuts</option>
+		<option value="Double Chocolate Donuts"> Double Chocolate Donuts</option>
+		
+     </select>
+    
+    </br></br><div>Quantity: <input type="input" id="qty" size="2"></div>
+    <br />
+    
+    <br />
+	<img id="myImage" src="donut.jpg" >
+ 
+    <div></br></br><input type="button" id="btnOrder" value="Order" ></div>
+    </form>
+    </section>
+    
+    
+    <section id="OrderSummary">
+		OUTPUT  
+		<hr />
+		<br /><br />
+		
+		
+    </section>
+
+</div>
+
+
+
+</body>
+</html>
